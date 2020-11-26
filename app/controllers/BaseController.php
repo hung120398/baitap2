@@ -3,10 +3,14 @@
 /**
  * 
  */
-class AdminController
+class BaseController
 {
-	protected $model;
+	protected $model = [];
+	const VIEW_FOLDER_NAME = 'app/views';
 	
+	
+
+
 	public function index(){
 
 	}
@@ -30,5 +34,11 @@ class AdminController
 	public function getModel(){
 		return $this->model;
 	}
+	
+	public function view($viewpath, $data = []) {
+		
+		require (self::VIEW_FOLDER_NAME.'/'.str_replace('.','/',$viewpath).'.php');
+	}
+
 	
 }
