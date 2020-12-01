@@ -1,35 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>thêm người dùng</title>
-</head>
+<?php include 'app/views/header.php'?>
 <body>
-<link rel="stylesheet" href="public/css/css.css">
 <div class='banner'>
         <div class="dropdown">
             <button class="dropbtn"><?php echo $_SESSION['user']['user']?></button>
             <div class="dropdown-content">
-            <a href="?controller=user&action=getViewAdd">Add</a>
-            <a href="?controller=Logout">logout</a>
-            <a href="?controller=user&action=index">quản lý người dùng</a>
+            <a href="?c=user&a=getviewadd">Add</a>
+            <a href="?c=Logout">logout</a>
+            <a href="?c=user&a=index">quản lý người dùng</a>
             </div>
         </div>
 </div>
-       
     
+        <?php if (isset($_SESSION['error'])): ?>
+        <div class='alert-danger' style='text-align:center'>
+                <li><?=$_SESSION['error']?></li>
+                <?php unset($_SESSION['error'])?>
+        </div>
+        <?php endif?>
+     
+      
     <div class='login'>
         <div>
         update người dùng
         <br><br>
         </div>
-        <form action="?controller=user&action=update&id=1" method="post">
+        <form action="?c=user&a=update&id=<?= $data['id']?>" method="post" id='form-register'>
             <table style ='border-style:hidden'>
                 <tr>
                     <td><label for="username">name</label></td>
                     <td><input type="text" id='username' name='username' value=<?php
-                    echo $data['name']?>></td>
+                    echo isset($data['name'])?$data['name']:'';?>></td>
+                   
                 </tr>
                 <tr>
                     
@@ -37,7 +38,7 @@
                 <tr>
                     <td><label for="email">email</label></td>
                     <td><input type="email" id='email' name='email' value=<?php
-                     echo $data['email']?>></td>
+                      echo isset($data['email'])?$data['email']:'';?>></td>
                 </tr>
                 <tr>
                    
@@ -52,8 +53,40 @@
         </form>
            
    </div>
+   <script type="text/javascript">
+$(function(){
+$("#form-register").validate({
+   rules:{
+         username:{   
+                  required:true,
+                 },
+      
+         email:{
+               required:true,
+               email:true,
+         }
+   },
+   messages:{
+         username:{
+                  required:"vui lòng nhập username",
+                  minlength:"vui lòng tạo username nhiều hơn 3 ký tự",
+                  
+         },
+        
+         email:{
+               required:"vui lòng nhập email",
+               email:"vui lòng nhập đúng định dạng email"
+         }
+   },
    
-    
+
+
+});
+
+
+
+})
+</script>
     
 </body>
-</html>
+<?php include 'app/views/footer.php'?>

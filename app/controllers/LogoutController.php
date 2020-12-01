@@ -2,7 +2,8 @@
 class LogoutController {
     public function __construct(){
         session_destroy();
-        header('location: ?controller=Login&action=login');
+        header('location: ?c=Login&a=login');
+ 
     } 
 
 }

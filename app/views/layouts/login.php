@@ -1,17 +1,13 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="public/css/css.css">
-</head>
+<?php include 'app/views/header.php';?>
 <body>
     <div class="login">
+        
         <div>
             Login <br><br>
         </div>
+
+
             <form action="" method="post">
                 <label for="username">username</label>
                 <input  class="nut" type="text" name="username" placeholder="username" id="username" ><br><br>
@@ -20,7 +16,10 @@
                 <input type="submit" name="submit" value="submit" class="button"><br>
             </form>
         </div>
-       
+        <div  class='alert-danger' style='text-align:center'>
+        <?php if(isset($_SESSION['error6'])):?>
+             <li><?= $_SESSION['error6'];?></li>
+              <?php endif ?>
+        </div>
 </body>
-
-</html>
+<?php include 'app/views/footer.php';?>
